@@ -91,12 +91,10 @@ public class DataLoader implements ApplicationListener<ApplicationReadyEvent> {
         guac.setUrl("www.google.pl");
         guac.setDirections("Take the avocado and eat it raw.");
         guac.getCategories().add(otherCategory);
-        guac.getIngredients().add(new Ingredient(new BigDecimal(2), pieceUom, "ripe avocados", guac));
-        guac.getIngredients().add(new Ingredient(new BigDecimal(1), tablespoonUom, "fresh lime juice", guac));
+        guac.addIngredient(new Ingredient(new BigDecimal(2), pieceUom, "ripe avocados"));
+        guac.addIngredient(new Ingredient(new BigDecimal(1), tablespoonUom, "fresh lime juice"));
 
-        Notes guacNotes = new Notes(guac, "Guacamole notes. Oh how perfect it is.");
-        guac.setNotes(guacNotes);
-
+        guac.setNotes(new Notes("Guacamole notes. Oh how perfect it is."));
 
         recipes.add(guac);
 
@@ -110,11 +108,10 @@ public class DataLoader implements ApplicationListener<ApplicationReadyEvent> {
         taco.setUrl("www.chicken.com");
         taco.setDirections("Spicy directions.");
         taco.getCategories().add(mexicanCategory);
-        taco.getIngredients().add(new Ingredient(new BigDecimal(2), pieceUom, "boneless, skinless chicken breast", taco));
-        taco.getIngredients().add(new Ingredient(new BigDecimal(1), dashUom, "peter parker goulash", taco));
+        taco.addIngredient(new Ingredient(new BigDecimal(2), pieceUom, "boneless, skinless chicken breast"));
+        taco.addIngredient(new Ingredient(new BigDecimal(1), dashUom, "peter parker goulash"));
 
-        taco.getNotes().setContent("Chicken tacos are awesome. Especially when they're spicy.");
-        taco.getNotes().setRecipe(taco);
+        taco.setNotes(new Notes("Chicken tacos are awesome. Especially when they're spicy."));
 
         recipes.add(taco);
         return recipes;
