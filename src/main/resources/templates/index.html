@@ -1,12 +1,48 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Recipes</title>
+    <title>My recipes</title>
 </head>
 <body>
-<h1>
-    My awesome recipes
-</h1>
+
+<h1 th:text="'My recipes'">My recipes</h1>
+<table>
+<thead>
+<tr>
+    <td>ID</td>
+    <td>Description</td>
+    <td>Difficulty</td>
+  <!--  <td>Categories</td> -->
+    <td>Prep time</td>
+    <td>Cook time</td>
+    <td>Servings</td>
+    <td>Source</td>
+    <td>URL</td>
+  <!--  <td>Ingredients</td> -->
+    <td>Directions</td>
+</tr>
+</thead>
+    <tbody>
+    <tr th:each="recipe: ${recipes}">
+        <td th:text="${recipe.id}">id plchldr</td>
+        <td th:text="${recipe.description}">description plchldr</td>
+        <td th:text="${recipe.difficulty}">difficulty plchldr</td>
+    <!--    <td th:each="category: ${recipe.categories}">categories plchldr
+            <p th:text="$category.description">category desc plchdlr</p>
+        </td>
+    -->    <td th:text="${recipe.prepTime + ' min'}">prepTime plchldr</td>
+        <td th:text="${recipe.cookTime + ' min'}">cookTime plchldr</td>
+        <td th:text="${recipe.servings}">servings plchldr</td>
+        <td th:text="${recipe.source}">source plchldr</td>
+        <td th:text="${recipe.url}">url plchldr</td>
+    <!--    <td th:each="ingredient: ${recipe.ingredients}">ingredients plchldr
+            <p th:text="${ingredient.amount} + ' ' + $ingredient.uom">amount + unit of measure plchdlr</p>
+            <p th:text="$ingredient.description">category desc plchdlr</p>
+    -->    </td>
+        <td th:text="${recipe.directions}">directions plchldr</td>
+    </tr>
+    </tbody>
+</table>
 </body>
 </html>

@@ -19,6 +19,15 @@ public class Ingredient {
     private String description;
     private BigDecimal amount;
 
+    public Ingredient(){}
+
+    public Ingredient( BigDecimal amount, UnitOfMeasure uom, String description, Recipe recipe) {
+        this.uom = uom;
+        this.description = description;
+        this.amount = amount;
+        this.recipe = recipe;
+    }
+
     public Long getId() {
         return id;
     }
