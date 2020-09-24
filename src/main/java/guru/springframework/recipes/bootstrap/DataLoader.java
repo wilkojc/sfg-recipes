@@ -4,13 +4,17 @@ import guru.springframework.recipes.domain.*;
 import guru.springframework.recipes.repositories.CategoryRepository;
 import guru.springframework.recipes.repositories.RecipeRepository;
 import guru.springframework.recipes.repositories.UnitOfMeasureRepository;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.*;
 
+@Slf4j
 @Component
 public class DataLoader implements ApplicationListener<ApplicationReadyEvent> {
 
@@ -18,16 +22,17 @@ public class DataLoader implements ApplicationListener<ApplicationReadyEvent> {
     private final CategoryRepository categoryRepository;
     private final UnitOfMeasureRepository unitOfMeasureRepository;
 
-    @Override
-    public void onApplicationEvent(final ApplicationReadyEvent applicationReadyEvent) {
-        recipeRepository.saveAll(getRecipes());
-        System.out.println("Loaded recipes.");
-    }
-
     public DataLoader(RecipeRepository recipeRepository, CategoryRepository categoryRepository, UnitOfMeasureRepository unitOfMeasureRepository) {
         this.recipeRepository = recipeRepository;
         this.categoryRepository = categoryRepository;
         this.unitOfMeasureRepository = unitOfMeasureRepository;
+    }
+
+    @Override
+    @Transactional
+    public void onApplicationEvent(final ApplicationReadyEvent applicationReadyEvent) {
+        recipeRepository.saveAll(getRecipes());
+        log.debug("Loading bootstrap data...");
     }
 
     private ArrayList<Recipe> getRecipes(){
@@ -53,6 +58,7 @@ public class DataLoader implements ApplicationListener<ApplicationReadyEvent> {
         Category italianCategory = italianCategoryOptional.get();
         Category otherCategory = otherCategoryOptional.get();
 
+        log.debug("Loaded categories...");
         //load units
         Optional<UnitOfMeasure> teaspoonUomOptional = unitOfMeasureRepository.findByDescription("teaspoon");
         Optional<UnitOfMeasure> tablespoonUomOptional = unitOfMeasureRepository.findByDescription("tablespoon");
@@ -79,6 +85,7 @@ public class DataLoader implements ApplicationListener<ApplicationReadyEvent> {
         UnitOfMeasure pieceUom = pieceUomOptional.get();
         //todo rest of the units
 
+        log.debug("Loaded units of measure...");
         ArrayList<Recipe> recipes = new ArrayList<>();
 
         Recipe guac = new Recipe();
