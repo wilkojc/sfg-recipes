@@ -4,7 +4,6 @@ import guru.springframework.recipes.domain.*;
 import guru.springframework.recipes.repositories.CategoryRepository;
 import guru.springframework.recipes.repositories.RecipeRepository;
 import guru.springframework.recipes.repositories.UnitOfMeasureRepository;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationListener;
