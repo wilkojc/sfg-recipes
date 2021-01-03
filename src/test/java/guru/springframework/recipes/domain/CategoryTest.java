@@ -1,6 +1,7 @@
 package guru.springframework.recipes.domain;
 
-import org.junit.jupiter.api.BeforeAll;
+
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
@@ -11,7 +12,7 @@ class CategoryTest {
 
     Category category;
 
-    @BeforeAll
+    @BeforeEach
     public void setUp(){
         category = new Category();
     }

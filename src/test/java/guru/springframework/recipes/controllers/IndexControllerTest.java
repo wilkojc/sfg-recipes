@@ -1,5 +1,7 @@
 package guru.springframework.recipes.controllers;
 
+import guru.springframework.recipes.converters.RecipeCommandToRecipe;
+import guru.springframework.recipes.converters.RecipeToRecipeCommand;
 import guru.springframework.recipes.domain.Recipe;
 import guru.springframework.recipes.repositories.RecipeRepository;
 import guru.springframework.recipes.services.RecipeService;
@@ -27,6 +29,8 @@ class IndexControllerTest {
 
     IndexController indexController;
     RecipeService recipeService;
+    RecipeCommandToRecipe recipeCommandToRecipe;
+    RecipeToRecipeCommand recipeToRecipeCommand;
 
     @Mock
     RecipeRepository recipeRepository;
@@ -38,7 +42,7 @@ class IndexControllerTest {
     @BeforeEach
     void setUp() {
         MockitoAnnotations.initMocks(this);
-        recipeService = new RecipeServiceImpl(recipeRepository);
+        recipeService = new RecipeServiceImpl(recipeRepository, recipeCommandToRecipe, recipeToRecipeCommand);
         indexController = new IndexController(recipeService);
     }
 

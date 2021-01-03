@@ -1,5 +1,7 @@
 package guru.springframework.recipes.services;
 
+import guru.springframework.recipes.converters.RecipeCommandToRecipe;
+import guru.springframework.recipes.converters.RecipeToRecipeCommand;
 import guru.springframework.recipes.domain.Recipe;
 import guru.springframework.recipes.repositories.RecipeRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -17,6 +19,8 @@ import static org.junit.jupiter.api.Assertions.*;
 class RecipeServiceImplTest {
 
     RecipeService recipeService;
+    RecipeCommandToRecipe recipeCommandToRecipe;
+    RecipeToRecipeCommand recipeToRecipeCommand;
 
     @Mock
     RecipeRepository recipeRepository;
@@ -25,7 +29,7 @@ class RecipeServiceImplTest {
     void setUp() {
         MockitoAnnotations.initMocks(this);
 
-        recipeService = new RecipeServiceImpl(recipeRepository);
+        recipeService = new RecipeServiceImpl(recipeRepository, recipeCommandToRecipe, recipeToRecipeCommand);
     }
 
     @Test
@@ -53,5 +57,6 @@ class RecipeServiceImplTest {
 
         assertEquals(recipes.size(), 1);
         verify(recipeRepository, times(1)).findAll();
+        verify(recipeRepository, never()).findById(anyLong());
     }
 }
