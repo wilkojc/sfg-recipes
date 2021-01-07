@@ -18,11 +18,11 @@ public class Notes {
     private Recipe recipe;
 
     @Lob
-    private String content;
+    private String notes;
 
     public Notes(){}
 
-    public Notes (String content) {
-        this.content = content;
+    public Notes (String notes) {
+        this.notes = notes;
     }
 }

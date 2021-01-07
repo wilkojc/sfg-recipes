@@ -24,14 +24,14 @@ public class NotesToNotesCommandTest {
         //given
         Notes notes = new Notes();
         notes.setId(ID_VALUE);
-        notes.setContent(RECIPE_NOTES);
+        notes.setNotes(RECIPE_NOTES);
 
         //when
         NotesCommand notesCommand = converter.convert(notes);
 
         //then
         assertEquals(ID_VALUE, notesCommand.getId());
-        assertEquals(RECIPE_NOTES, notesCommand.getContent());
+        assertEquals(RECIPE_NOTES, notesCommand.getNotes());
     }
 
     @Test

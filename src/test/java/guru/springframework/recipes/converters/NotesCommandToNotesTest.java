@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class NotesCommandToNotesTest {
 
     public static final Long ID_VALUE = new Long(1L);
-    public static final String RECIPE_NOTES = "Notes";
+    public static final String RECIPE_NOTES = "content";
     NotesCommandToNotes converter;
 
     @BeforeEach
@@ -36,7 +36,7 @@ public class NotesCommandToNotesTest {
         //given
         NotesCommand notesCommand = new NotesCommand();
         notesCommand.setId(ID_VALUE);
-        notesCommand.setContent(RECIPE_NOTES);
+        notesCommand.setNotes(RECIPE_NOTES);
 
         //when
         Notes notes = converter.convert(notesCommand);
@@ -44,7 +44,7 @@ public class NotesCommandToNotesTest {
         //then
         assertNotNull(notes);
         assertEquals(ID_VALUE, notes.getId());
-        assertEquals(RECIPE_NOTES, notes.getContent());
+        assertEquals(RECIPE_NOTES, notes.getNotes());
     }
 
 }
