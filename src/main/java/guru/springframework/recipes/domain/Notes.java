@@ -6,7 +6,7 @@ import lombok.EqualsAndHashCode;
 import javax.persistence.*;
 
 @Data
-@EqualsAndHashCode(exclude = "recipe")
+@EqualsAndHashCode(exclude = {"recipe"})
 @Entity
 public class Notes {
 
@@ -14,15 +14,10 @@ public class Notes {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne()
+    @OneToOne
     private Recipe recipe;
 
     @Lob
-    private String notes;
+    private String recipeNotes;
 
-    public Notes(){}
-
-    public Notes (String notes) {
-        this.notes = notes;
-    }
 }
