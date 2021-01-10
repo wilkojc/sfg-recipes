@@ -33,4 +33,8 @@ public class Ingredient {
         this.amount = amount;
     }
 
+    @Override
+    public String toString(){
+        return "a";
+    }
 }
