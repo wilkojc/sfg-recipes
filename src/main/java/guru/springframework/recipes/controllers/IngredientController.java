@@ -1,6 +1,9 @@
 package guru.springframework.recipes.controllers;
 
 import guru.springframework.recipes.commands.IngredientCommand;
+import guru.springframework.recipes.commands.RecipeCommand;
+import guru.springframework.recipes.commands.UnitOfMeasureCommand;
+import guru.springframework.recipes.domain.Recipe;
 import guru.springframework.recipes.services.IngredientService;
 import guru.springframework.recipes.services.RecipeService;
 import guru.springframework.recipes.services.UnitOfMeasureService;
@@ -34,10 +37,25 @@ public class IngredientController {
 
     @GetMapping
     @RequestMapping("recipe/{recipeId}/ingredient/{ingredientId}/show")
-    public String showRecipeIngredient(@PathVariable Long recipeId, @PathVariable Long ingredientId, Model model) {
+    public String showRecipeIngredient(@PathVariable String recipeId, @PathVariable String ingredientId, Model model) {
         model.addAttribute("ingredient", ingredientService.findByRecipeIdAndIngredientId(Long.valueOf(recipeId), Long.valueOf(ingredientId)));
 
         return "recipe/ingredient/show";
+    }
+
+    @GetMapping
+    @RequestMapping("recipe/{recipeId}/ingredient/new")
+    public String newIngredient(@PathVariable String recipeId, Model model) {
+        RecipeCommand recipeCommand = recipeService.findCommandById(Long.valueOf(recipeId));
+
+        IngredientCommand ingredientCommand = new IngredientCommand();
+        ingredientCommand.setRecipeId(Long.valueOf(recipeId));
+
+        ingredientCommand.setUom(new UnitOfMeasureCommand());
+        model.addAttribute("ingredient", ingredientCommand);
+        model.addAttribute("uomList", unitOfMeasureService.listAllUoms());
+
+        return "recipe/ingredient/ingredientform";
     }
 
     @GetMapping
@@ -57,6 +75,6 @@ public class IngredientController {
         log.debug("Saved recipe id: " + savedCommand.getRecipeId());
         log.debug("Saved ingredient id: " + savedCommand.getId());
 
-        return "redirect:/recipe/" + savedCommand.getRecipeId() + "/ingredient/" + savedCommand.getId() + "/show";
+        return "redirect:/recipe/" + savedCommand.getRecipeId() + "/ingredients";
     }
 }
