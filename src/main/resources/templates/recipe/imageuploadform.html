@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Image Upload Form</title>
+
+    <link rel="stylesheet" href="/webjars/bootstrap/4.5.3/css/bootstrap.min.css" />
+    <script src="/webjars/jquery/3.5.1/jquery.min.js"></script>
+    <script src="/webjars/bootstrap/4.5.3/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+<!--/*@thymesVar id="recipe" type="guru.springframework.recipes.domain.Recipe"*/-->
+<div class="container-fluid" style="margin-top: 20px">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <div class="card">
+                    <div class="card-header">
+                        <h1 class="card-title">Upload a new recipe image</h1>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-5">
+                                <form  action="http:\\localhost" method="post" enctype="multipart/form-data"
+                                       th:action="@{'/recipe/' + ${recipe.getId()} + '/image'}">
+                                    <label class="control-label">Select File</label>
+                                    <input id="imagefile" name="imagefile" type="file" class="file">
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -17,6 +17,10 @@
                 <div class="card-header bg-primary">
                         <h1 class="card-title" th:text="${recipe.getDescription()}">Recipe Description Here!</h1>
                     </div>
+                <div class="col-md-1">
+                    <a class="btn btn-default" href="#"
+                       th:href="@{'/recipe/' + ${recipe.id} + '/image'}" role="button">Change Image</a>
+                </div>
                     <div class="card-body border border-primary">
                         <div class="row">
                             <div class="col-6 col-md-3">
@@ -28,6 +32,11 @@
                                     <li>cat two</li>
                                     <li>cat three</li>
                                 </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <img src="../../static/images/guacamole400x400WithX.jpg"
+                                     th:src="@{'/recipe/' + ${recipe.id} + '/recipeimage'}"
+                                width="200" height="200">
                             </div>
                         </div>
                         <div class="row">
